@@ -1,41 +1,27 @@
 import { PluginInstance } from '@rispa/core'
 import { TransformOptions } from 'babel-core'
-import mergeBabelConfigs from 'babel-merge'
+import mergeBabelConfigs = require('babel-merge')
 import defaultBabelConfig from './babelConfig'
 
 class BabelPlugin extends PluginInstance {
-  private babelConfig: TransformOptions = defaultBabelConfig
+  private babelConfig: TransformOptions[] = []
 
-  setPlugins(plugins) {
-    this.babelConfig.plugins = plugins
+  start() {
+    this.addConfig(defaultBabelConfig)
   }
 
-  setPresets(presets) {
-    this.babelConfig.presets = presets
+  addConfig(...config: TransformOptions[]) {
+    this.babelConfig = this.babelConfig.concat(config)
   }
 
-  setIgnore(ignore) {
-    this.babelConfig.ignore = ignore
-  }
+  getConfig(): TransformOptions {
+    return this.babelConfig.reduce((result, config) => {
+      if (typeof config === 'function') {
+        return mergeBabelConfigs(result, config())
+      }
 
-  addPlugin(...plugins) {
-    this.babelConfig.plugins = this.babelConfig.plugins.concat(plugins)
-  }
-
-  addPreset(...presets) {
-    this.babelConfig.plugins = this.babelConfig.plugins.concat(presets)
-  }
-
-  addIgnore(...ignores) {
-    this.babelConfig.ignore = this.babelConfig.ignore.concat(ignores)
-  }
-
-  merge(anotherBabelConfig) {
-    this.babelConfig = mergeBabelConfigs(this.babelConfig, anotherBabelConfig)
-  }
-
-  getConfig() {
-    return this.babelConfig
+      return mergeBabelConfigs(result, config)
+    }, {})
   }
 }
 

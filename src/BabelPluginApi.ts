@@ -5,35 +5,17 @@ import BabelPlugin from './BabelPlugin'
 class BabelPluginApi extends PluginApi<BabelPlugin> {
   static pluginName = '@rispa/babel'
 
-  setPlugins(plugins) {
-    this.instance.setPlugins(plugins)
+  addPlugin(...plugins: any[]) {
+    this.instance.addConfig({
+      plugins,
+    })
   }
 
-  setPresets(presets) {
-    this.instance.setPresets(presets)
+  addConfig(...config: TransformOptions[]) {
+    this.instance.addConfig(...config)
   }
 
-  setIgnore(ignore) {
-    this.instance.setIgnore(ignore)
-  }
-
-  addPlugin(...plugins: string[]) {
-    this.instance.addPlugin(...plugins)
-  }
-
-  addPreset(...presets: string[]) {
-    this.instance.addPreset(...presets)
-  }
-
-  addIgnore(...ignores: string[]) {
-    this.instance.addIgnore(...ignores)
-  }
-
-  merge(anotherBabelConfig: TransformOptions) {
-    this.instance.merge(anotherBabelConfig)
-  }
-
-  getConfig() {
+  getConfig(): TransformOptions {
     return this.instance.getConfig()
   }
 }
