@@ -1,9 +1,9 @@
-import { PluginInstance, RispaConfig } from '@rispa/core'
+import { PluginInstance } from '@rispa/core'
 import { TransformOptions } from 'babel-core'
 import mergeBabelConfigs = require('babel-merge')
 import defaultBabelConfig from './babelConfig'
 
-export type BabelConfigFabric = (config: RispaConfig) => TransformOptions
+export type BabelConfigFabric = () => TransformOptions
 export type BabelConfig = TransformOptions | BabelConfigFabric
 
 class BabelPlugin extends PluginInstance {
@@ -32,7 +32,7 @@ class BabelPlugin extends PluginInstance {
 
     const babelConfig = this.babelConfig.reduce((result, config) => {
       if (typeof config === 'function') {
-        return mergeBabelConfigs(result, config(this.config))
+        return mergeBabelConfigs(result, config())
       }
 
       return mergeBabelConfigs(result, config)

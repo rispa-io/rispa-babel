@@ -4,7 +4,7 @@
   "version": "3.0.1",
   "description": "Rispa Babel plugin",
   "license": "MIT",
-  "rispa:activator": "./.rispa/activator.js",
+  "rispa:activator": "./lib/activator.js",
   "main": "./lib/BabelPluginApi.js",
   "typings": "./lib/BabelPluginApi.d.ts",
   "devDependencies": {
