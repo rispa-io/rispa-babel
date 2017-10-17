@@ -9,7 +9,7 @@
   "typings": "./lib/BabelPluginApi.d.ts",
   "devDependencies": {
     "jest": "^20.0.3",
-    "typescript": "^2.5.2",
+    "typescript": "^2.5.3",
     "@types/node": "^8.0.31",
     "@types/babel-core": "^6.25.2",
     "tslint": "^5.7.0"
