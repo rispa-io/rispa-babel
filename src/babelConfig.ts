@@ -38,7 +38,7 @@ const config: TransformOptions = {
       ramda: {
         transform: 'ramda/src/${member}',
         preventFullImport: true,
-      }
+      },
     }],
   ],
 

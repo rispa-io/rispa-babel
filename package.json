@@ -8,6 +8,7 @@
   "main": "./lib/BabelPluginApi.js",
   "typings": "./lib/BabelPluginApi.d.ts",
   "devDependencies": {
+    "@rispa/tslint-config": ">=1.0.0",
     "jest": "^20.0.3",
     "typescript": "^2.5.2",
     "@types/node": "^8.0.31",
@@ -38,8 +39,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "tslint .",
-    "lint:fix": "tslint . --fix"
+    "lint": "tslint --type-check -p tsconfig.json",
+    "lint:fix": "tslint --fix --type-check -p tsconfig.json"
   },
   "jest": {
     "collectCoverageFrom": [
