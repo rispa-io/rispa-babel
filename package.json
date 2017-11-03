@@ -1,7 +1,7 @@
 {
   "name": "@rispa/babel",
   "rispa:name": "babel",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "description": "Rispa Babel plugin",
   "license": "MIT",
   "rispa:activator": "./lib/activator.js",
@@ -16,7 +16,7 @@
     "tslint": "^5.7.0"
   },
   "dependencies": {
-    "@rispa/core": "4.0.4",
+    "@rispa/core": "4.1.x",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dynamic-import-webpack": "^1.0.1",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
