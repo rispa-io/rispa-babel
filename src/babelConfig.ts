@@ -39,9 +39,7 @@ const config: TransformOptions = {
     }],
   ],
 
-  ignore: [
-    'node_modules',
-  ],
+  ignore: [],
 }
 
 export default config
