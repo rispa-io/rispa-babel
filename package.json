@@ -1,7 +1,7 @@
 {
   "name": "@rispa/babel",
   "rispa:name": "babel",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Rispa Babel plugin",
   "license": "MIT",
   "rispa:activator": "./lib/activator.js",
