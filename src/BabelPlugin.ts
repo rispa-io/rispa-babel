@@ -8,8 +8,8 @@ export type BabelConfigFabric = (config: object) => TransformOptions
 export type BabelConfig = TransformOptions | BabelConfigFabric
 
 class BabelPlugin extends PluginInstance {
+  private readonly config: object
   private babelConfig: BabelConfig[] = []
-  private config: object
 
   constructor(context) {
     super(context)

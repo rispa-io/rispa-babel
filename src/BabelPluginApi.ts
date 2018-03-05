@@ -5,6 +5,12 @@ import BabelPlugin from './BabelPlugin'
 class BabelPluginApi extends PluginApi<BabelPlugin> {
   static pluginName = '@rispa/babel'
 
+  static startHandler(context) {
+    const instance = context.get(BabelPluginApi.pluginName)
+
+    return instance.getConfig()
+  }
+
   addPlugin(...plugins: any[]) {
     this.instance.addConfig({
       plugins,
