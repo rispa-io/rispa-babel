@@ -1,4 +1,4 @@
-import { PluginInstance } from '@rispa/core'
+import { PluginInstance, RispaContext } from '@rispa/core'
 import ConfigPluginApi from '@rispa/config'
 import { TransformOptions } from '@babel/core'
 import mergeBabelConfigs = require('babel-merge')
@@ -11,10 +11,10 @@ class BabelPlugin extends PluginInstance {
   private babelConfig: BabelConfig[] = []
   private readonly config: Config
 
-  constructor(context) {
+  constructor(context: RispaContext) {
     super(context)
 
-    this.config = context.get(ConfigPluginApi.pluginName).getConfig()
+    this.config = context.get<ConfigPluginApi>(ConfigPluginApi.pluginName).getConfig() as Config
   }
 
   start() {

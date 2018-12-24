@@ -1,5 +1,5 @@
 import { PluginApi } from '@rispa/core'
-import { TransformOptions } from 'babel-core'
+import { TransformOptions } from '@babel/core'
 import BabelPlugin from './BabelPlugin'
 
 class BabelPluginApi extends PluginApi<BabelPlugin> {
