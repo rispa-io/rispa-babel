@@ -11,8 +11,7 @@ export default (config: Config): TransformOptions => ({
         targets: {
           browsers: config.browsers,
         },
-        useBuiltIns: true,
-        debug: Boolean(process.env.POLYFILL_DEBUG),
+        useBuiltIns: 'entry',
       },
     }],
   ],

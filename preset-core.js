@@ -1,11 +1,27 @@
 const { declare } = require('@babel/helper-plugin-utils')
 
-module.exports = declare((api, { env = {} }) => {
+module.exports = declare((api, options, env) => {
   api.assertVersion(7)
+
+  const isEnvProduction = env === 'production'
 
   return {
     presets: [
-      [require.resolve('@babel/preset-env'), env],
+      [require.resolve('@babel/preset-env'), {
+        // Pass loose for transforms
+        loose: true,
+
+        // Exclude transforms that make all code slower
+        exclude: ['transform-typeof-symbol'],
+
+        // Do not transform modules to CJS
+        modules: false,
+
+        // for UglifyJS
+        forceAllTransforms: !isEnvProduction,
+
+        ...options.env,
+      }],
     ],
 
     plugins: [
@@ -21,6 +37,14 @@ module.exports = declare((api, { env = {} }) => {
       require.resolve('@babel/plugin-syntax-import-meta'),
       [require.resolve('@babel/plugin-proposal-class-properties'), { loose: false }],
       require.resolve('@babel/plugin-proposal-json-strings'),
+
+      // Polyfills the runtime needed for async/await, generators, and friends
+      // https://babeljs.io/docs/en/babel-plugin-transform-runtime
+      [require.resolve('@babel/plugin-transform-runtime'), {
+        corejs: false,
+        helpers: true,
+        regenerator: true,
+      }],
     ],
   }
 })
