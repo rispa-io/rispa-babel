@@ -20,7 +20,7 @@ module.exports = declare((api, options, env) => {
         // for UglifyJS
         forceAllTransforms: !isEnvProduction,
 
-        ...options.env,
+        ...options,
       }],
     ],
 
