@@ -3,7 +3,9 @@ const { declare } = require('@babel/helper-plugin-utils')
 module.exports = declare((api, options, env) => {
   api.assertVersion(7)
 
+  const { useBuiltIns, targets } = options
   const isEnvProduction = env === 'production'
+  const isTargetNode = targets && !!targets.node
 
   return {
     presets: [
@@ -18,9 +20,11 @@ module.exports = declare((api, options, env) => {
         modules: false,
 
         // for UglifyJS
-        forceAllTransforms: !isEnvProduction,
+        forceAllTransforms: !isEnvProduction && !isTargetNode,
 
-        ...options,
+        targets,
+
+        useBuiltIns,
       }],
     ],
 
@@ -33,7 +37,9 @@ module.exports = declare((api, options, env) => {
       require.resolve('@babel/plugin-proposal-throw-expressions'),
 
       // Stage 3
-      require.resolve('@babel/plugin-syntax-dynamic-import'),
+      isTargetNode
+        ? require.resolve('babel-plugin-dynamic-import-node')
+        : require.resolve('@babel/plugin-syntax-dynamic-import'),
       require.resolve('@babel/plugin-syntax-import-meta'),
       [require.resolve('@babel/plugin-proposal-class-properties'), { loose: false }],
       require.resolve('@babel/plugin-proposal-json-strings'),

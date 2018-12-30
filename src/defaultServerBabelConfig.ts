@@ -1,17 +1,14 @@
 import { TransformOptions } from '@babel/core'
-
-export interface Config {
-  browsers: string[],
-}
+import { Config } from './BabelPlugin'
 
 export default (config: Config): TransformOptions => ({
   presets: [
     [require.resolve('../preset-app'), {
       env: {
         targets: {
-          browsers: config.browsers,
+          node: 'current',
         },
-        useBuiltIns: 'entry',
+        useBuiltIns: false,
       },
     }],
   ],
